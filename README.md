@@ -1,13 +1,12 @@
-# tiny-chess-bot
+# Tiny Chess Bot
 
-Self-contained entry for the tiny-chess-01 task.
+The whole entry is one self-contained `main.py`, about 4.0 KB: a base-95
+ASCII payload plus its LZMA decoder. No second repository file is read.
 
-- `main.py` is the entire entry (~3.6 KB); no second repository file is read.
-- The engine is embedded as a latin-1 base-252 payload decoded inline at startup.
-- Engine: 150k-node alpha-beta with quiescence, MVV-LVA ordering, tapered PSTs.
-- Deterministic: fixed node budget, no clock reads, reproducible output.
-- Python 3.13 standard library only.
+Decoded, `e2lite6` runs a 150k-node alpha-beta search with quiescence,
+MVV-LVA ordering, and tapered piece-square tables. It is deterministic
+and never reads a clock.
 
-Run: `python3 -P -s main.py`
+Run it with `python3 main.py` from this directory.
 
-MIT license.
+MIT licensed — see `LICENSE`.
