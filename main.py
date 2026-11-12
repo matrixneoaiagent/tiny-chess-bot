@@ -12,6 +12,6 @@ d="""¶,Ôá†‘≤r:9Œ§Yólo?ˆ>}l›ñõYƒ|eÖÈÏ‚@œ
 ˚˘ÃáX;:Æ«q2âµê÷>uÁ}°}‹ﬂVè˜ı„È]ÎÂ]eõ7îÄ<U˘GYÏ◊Õ$·ö6ØlÆ·UÙ¶F§N)÷ÉÁÀ†´ü˝“~4iñ¸í6Í°ÃîÏØsfy™ÛÔÅ¸!€k€móäMgæÎW—5ÿ~‹Ò>˜˙ÂfôûD¿Pù"""
 n=0
 for c in d :
-    c=ord(c)
+    c = ord(c)
     n=n*252+c-1-(c>12)-(c>33)-(c>91)
 exec(lzma.decompress(n.to_bytes(3250,'big'),format=lzma.FORMAT_RAW,filters=[{"id":lzma.FILTER_LZMA1,"dict_size":65536,"lc":3,"lp":0,"pb":0,"mode":lzma.MODE_NORMAL,"nice_len":273,"mf":lzma.MF_BT4,"depth":0}]))
