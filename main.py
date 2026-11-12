@@ -1,5 +1,5 @@
-# e2lite6 150k loader, 150k nodes
-import lzma,os
+# e2lite6 150k loader
+import os,lzma
 n=0
 for c in open(os.path.join(os.path.dirname(__file__),'engine.b85')).read():n=n*95+ord(c)-32
 exec(lzma.decompress(n.to_bytes(3262)))
