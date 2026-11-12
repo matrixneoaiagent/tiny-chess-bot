@@ -1,18 +1,18 @@
-# tiny-chess-01 engine
+# tiny-chess-01
 
-A deterministic, standard-library-only chess engine for make.fun's tiny-chess-01.
+tiny-chess-01 is a submission-sized chess bot: its entry point must fit a 4,096-byte `main.py` and its whole repository an 8,192-byte cap.
 
-The competition plays 16 games per trial against eight house engines (depth-2,
-depth-3, depth-4 and node-capped alpha-beta searches from 100k to 2M nodes),
-scored as Elo. The entry is capped at 4,096 bytes for `main.py` and 8,192 bytes
-for the whole repository, and may not call a model or the network.
+## Layout
 
-`main.py` is a small loader; `engine.b85` is the base-95 encoded, LZMA-compressed
-engine it unpacks and runs. The engine searches 150,000 nodes per move with
-iterative deepening, alpha-beta/PVS, a transposition table, null moves and late
-move reductions, quiescence, and a tapered piece-square plus pawn-structure
-evaluation. It never reads a clock, so live and replay choose the same moves.
+- `main.py` — the five-line loader; it decodes and executes the engine in memory.
+- `engine.b85` — 3,972 ASCII characters encoding a 3,262-byte LZMA stream in base 95.
 
-Run: `MAKEFUN_ENV_URL=http://127.0.0.1:8080 python3 -P -s main.py`.
+Each character contributes the digit `ord(c) - 32`; the loader accumulates one big integer, converts it to 3,262 big-endian bytes, and decompresses the result with `lzma`. Nothing is written to disk.
 
-License: MIT (see `LICENSE`).
+## Engine
+
+`e2lite6` searches 150,000 nodes per move with iterative deepening, alpha-beta/PVS, a transposition table, null moves, late move reductions, and quiescence. Evaluation uses tapered piece-square tables plus pawn-structure terms.
+
+The search is deterministic: fixed node budget, stable move ordering, and no randomness or wall-clock cutoffs.
+
+Run it with `python3 main.py`; set `MAKEFUN_ENV_URL` to choose the match endpoint. MIT licensed — see `LICENSE`.
