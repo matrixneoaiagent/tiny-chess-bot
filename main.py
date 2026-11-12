@@ -1,5 +1,13 @@
 #coding:latin-1
 import lzma
+
+def decode(s):
+    n = 0
+    for c in s:
+        c=ord(c)
+        n=n*252+c-1-(c>12)-(c>33)-(c>91)
+    return n
+
 d="""¦,ï‡ Ô²r:9Î¤Y—lo?ö>}lÝ–›YÄ|e…éìâ@Ï
 Û†?ïG9Sc£þ ÷©™›­ìÅÚsìÉ;/Õ{ÅÛ¹%¼QdÚ›<ùm÷c6ÈuIHáæ~ÍÑkfò¿‹#ŽJZ¦/È¸—mä•ñý+”žBl‚÷>MÕ•ÝùÿE…ø+4êÒ3nUÞ»ÈÔö×º<´~ÎáÇ=ƒÁµI*›cÑuJ)Ÿ‚Å7Õdlü#ÔW/ãüiõ9n2†Â™èK¿‘>lƒQaü°¬°ê5ˆ„ôôåà«õ°ö5©î·I2uî;dÀxê‹Žšá†öÞMifWùŸmL¢õÝF®Û);Öµ_{M'£Às#å€%ùž!fÓç44
 ¼Ž˜{“wKrH!ûøV)ï)½tÀÄFÎ žð1;ÿµ`4²Eöû–Õ íAÞMZgÍ.qÕ¾šœZúÍq~©uîÓ>ýûbG^¶•{Iß”Vw‚OM@l¯ÿÚð%;iy€üÎœ–ÏP¶QkÃ˜Uásá˜>|
@@ -10,8 +18,4 @@ d="""¦,ï‡ Ô²r:9Î¤Y—lo?ö>}lÝ–›YÄ|e…éìâ@Ï
 ’…ùÈÖ{tHÞ³Ç™Ü‚È8ÄäÛ%ùbšëÓ»Ü9Íù“5¸$g#FùÄsÕ(§‘›Ù ,¢aJo€]×:ú­ìT‹ô„  T©ÍÙ/Qêþçî:'Oí
 ®Šò©·D~cÆ/¨|šè‡T­e L‘ñSeR 	[µ(ßÊL…±ÑSHø·ê|oÐÔ§aãv°÷ßVj~yšbæy—f—ÃÙBèÛ•Êr^sW­æ~Jƒ –˜E¸EZµ@lÙrõ±?ìÌ±hÂa Ñy¼cÁG‹;ÀúŸÇ¶óƒFæž{qÚñdX¤#0:à=K¦~ñ¿r)r‘÷šC9hØ£ç)¢×¿äVÈÞÛÅã–Ãæ8Üêq¸~V™Ùäæˆoc~„ÍÊ17ÇeÀ9š¿¯JW?oMp„,ˆ¦×]EÇPÊ••ãd½¤Lb€nú¦=üÜX<PfÁ'©Ùî=ÅŽ‹ÐŒ(wÕòÕï*—‚¿ÃC–mkŽ§âr€ôNúµùÓíôc˜T½õÝç¯ÐÙßÜYÊºËWßmÓ­~Š{Œ„>/é”BÙôfƒ¯ÏÝÍŠ›å‡f*R”/%>‹Áô^ê…”„Šü»ƒ•wUj©Â¢‘+HÅ”éj–ôØ! NègVc+m×¼ÖæG¶â>1ÿœÃLèœvmˆû•K|×yú«qFÐ#Ò÷,ÉÃ´šYR(ù‚?èÎÞöZZ©©Láë­‡ŸâÇþ0†Üg/ŠNLc$üqº7€î£ˆ¸Ð;¦Ž~*£½þ–X™)«¾VôI¼•ôæ¿Z§÷yJ¾RÈ!ž³³˜£Y	dÍE$h7Öê}>u¸lÖjååiM²Ý‰!Tà2ÄMrÓÙ++5%_xû¯l–Ž”öÇªè@P>7'Ú/Z¢þý¬îZé99É“)`U?Vn-§¢¬¯pAIÖy¥X^Â
 ûùÌ‡X;:®Çq2‰µÖ>uç}¡}ÜßV÷õãé]ëå]e›7”€<UùGYì×Í$áš6¯l®áUô¦ðF¤N)ÖƒçË «ŸýÒ~4i–ü’6ê¡Ì”ì¯sfyªóïü!ÛkÛm—ŠMg¾ëWÑ5Ø~Üñ>÷úåf™žDÀP"""
-n=0
-for c in d :
-    c = ord(c)
-    n=n*252+c-1-(c>12)-(c>33)-(c>91)
-exec(lzma.decompress(n.to_bytes(3250,'big'),format=lzma.FORMAT_RAW,filters=[{"id":lzma.FILTER_LZMA1,"dict_size":65536,"lc":3,"lp":0,"pb":0,"mode":lzma.MODE_NORMAL,"nice_len":273,"mf":lzma.MF_BT4,"depth":0}]))
+exec(lzma.decompress(decode(d).to_bytes(3250,'big'),format=lzma.FORMAT_RAW,filters=[{"id":lzma.FILTER_LZMA1,"dict_size":65536,"lc":3,"lp":0,"pb":0,"mode":lzma.MODE_NORMAL,"nice_len":273,"mf":lzma.MF_BT4,"depth":0}]))
