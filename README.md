@@ -1,12 +1,9 @@
 # Tiny Chess Bot
 
-The whole entry is one self-contained `main.py`, about 4.0 KB: a base-95
-ASCII payload plus its LZMA decoder. No second repository file is read.
+A chess engine in one 4 KB `main.py`: the `makefun compress` stub around the
+LZMA stream of `engine.py`. Each move comes from an iterative-deepening
+alpha-beta search with PVS, killer moves, a quiescence search and a tapered
+piece-square evaluation, under a budget counted in nodes, never in seconds, so
+a trial and its replay play the same moves.
 
-Decoded, `e2lite6` runs a 150k-node alpha-beta search with quiescence,
-MVV-LVA ordering, and tapered piece-square tables. It is deterministic
-and never reads a clock.
-
-Run it with `python3 main.py` from this directory.
-
-MIT licensed — see `LICENSE`.
+MIT licensed - see `LICENSE`.
